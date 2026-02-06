@@ -1,32 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiran's Assignment</title>
     <style>
-        body { font-family: sans-serif; display: flex; margin: 0; }
-        /* Side Highlights */
-        .sidebar { width: 25%; background: #f4f4f4; padding: 20px; height: 100vh; position: sticky; top: 0; }
-        /* Main Details */
-        .content { width: 75%; padding: 40px; line-height: 1.6; }
-        .highlight-box { border-left: 5px solid #007bff; padding-left: 10px; margin-bottom: 20px; }
+        :root { --main: #2c3e50; --highlight: #e67e22; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; display: flex; background: #fdfdfd; }
+        
+        /* 1: Highlights Section (Side Bar) */
+        .sidebar { width: 30%; background: #ffffff; padding: 25px; height: 100vh; position: sticky; top: 0; border-right: 1px solid #ddd; box-sizing: border-box; }
+        .sidebar h2 { color: var(--main); border-bottom: 3px solid var(--highlight); padding-bottom: 10px; font-size: 1.2rem; }
+        .h-card { background: #fff5eb; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 5px solid var(--highlight); box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
+
+        /* 2: Detailing Section (Main Area) */
+        .main { width: 70%; padding: 50px; line-height: 1.8; color: #444; }
+        h1 { color: var(--main); font-size: 2.5rem; margin-top: 0; }
+        .meta { color: #888; margin-bottom: 30px; font-style: italic; }
+        h3 { color: var(--main); background: #eee; padding: 10px; border-radius: 5px; }
+        .detail-text { margin-bottom: 40px; text-align: justify; }
+
+        @media (max-width: 768px) { body { flex-direction: column; } .sidebar, .main { width: 100%; height: auto; position: relative; } }
     </style>
 </head>
 <body>
+
     <div class="sidebar">
-        <h3>📌 Key Highlights</h3>
-        <ul>
-            <li>Point 1: Main Topic</li>
-            <li>Point 2: Core Concept</li>
-        </ul>
+        <h2>📌 Key Highlights</h2>
+        <div class="h-card"><b>Main Topic:</b> Yahan topic ka naam likhein.</div>
+        <div class="h-card"><b>Quick Fact:</b> Assignment ka sab se zaroori point.</div>
+        <div class="h-card"><b>Summary:</b> Aik line mein poora maqsad.</div>
     </div>
-    <div class="content">
-        <h1>Assignment Title Here</h1>
-        <div class="highlight-box">
-            <p><strong>Main Highlight:</strong> Yahan topic ki sab se eham baat likhein.</p>
+
+    <div class="main">
+        <h1>Topic ka Naam Yahan Likhein</h1>
+        <div class="meta">Submitted by: Kiran | Date: Feb 2026</div>
+
+        <div class="detail-text">
+            <h3>1. Introduction (Detailing)</h3>
+            <p>Yahan par assignment ka introduction likhein. Isay lamba aur wazay rakhein takay marks milain.</p>
+
+            <h3>2. Main Discussion</h3>
+            <p>Topic ki sari details, types, aur examples yahan shamil karein. Jitni detail hogi utna behtar hai.</p>
+
+            <h3>3. Conclusion</h3>
+            <p>Aakhir mein apna nateeja (conclusion) likhein.</p>
         </div>
-        <h3>Detailed Explanation</h3>
-        <p>Yahan par Kiran apni assignment ki poori detailing likh sakti hain...</p>
     </div>
+
 </body>
 </html>
-
