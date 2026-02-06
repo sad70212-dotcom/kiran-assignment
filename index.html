@@ -2,38 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kiran's Search Assignment</title>
+    <title>Kiran's Assignment Portal</title>
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; text-align: center; padding: 20px; }
-        .search-area { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 500px; margin: 0 auto 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .search-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto 20px; text-align: center; }
         input { padding: 10px; width: 60%; border-radius: 5px; border: 1px solid #ddd; }
-        button { padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        #result { background: white; padding: 30px; border-radius: 10px; text-align: left; max-width: 700px; margin: 0 auto; display: none; }
+        button { padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        /* Layout for 3 Parts */
+        #result-layout { display: none; max-width: 900px; margin: 0 auto; display: flex; gap: 20px; }
+        .sidebar { width: 30%; background: white; padding: 20px; border-radius: 10px; height: fit-content; border-left: 5px solid #e67e22; }
+        .main-content { width: 70%; background: white; padding: 30px; border-radius: 10px; }
+        h3 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="search-area">
+    <div class="search-container">
         <h2>🔍 Search Assignment Topic</h2>
-        <input type="text" id="topicInput" placeholder="Topic likhein...">
-        <button onclick="searchTopic()">Search</button>
+        <input type="text" id="topicInput" placeholder="Enter topic (e.g. Physics, History)...">
+        <button onclick="generateAssignment()">Search</button>
     </div>
 
-    <div id="result">
-        <h1 id="title"></h1>
-        <p id="details"></p>
+    <div id="result-layout">
+        <div class="sidebar">
+            <h3>📌 Highlights</h3>
+            <div id="outHighlight">Waiting for search...</div>
+        </div>
+
+        <div class="main-content">
+            <h1 id="outTitle" style="margin-top:0;"></h1>
+            
+            <h3>1. Introduction</h3>
+            <div id="outIntro"></div>
+
+            <h3>2. Detailed Discussion</h3>
+            <div id="outDetail"></div>
+        </div>
     </div>
 
     <script>
-        async function searchTopic() {
-            let t = document.getElementById('topicInput').value;
-            let res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${t}`);
-            let data = await res.json();
+        async function generateAssignment() {
+            let topic = document.getElementById('topicInput').value;
+            if(!topic) return alert("Please enter a topic!");
+            
+            const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${topic}`);
+            const data = await res.json();
+
             if(data.title) {
-                document.getElementById('result').style.display = 'block';
-                document.getElementById('title').innerText = data.title;
-                document.getElementById('details').innerText = data.extract;
-            } else { alert("Topic nahi mila!"); }
+                document.getElementById('result-layout').style.display = 'flex';
+                document.getElementById('outTitle').innerText = data.title;
+                
+                // Breaking data into 3 parts
+                document.getElementById('outHighlight').innerText = "Main Concept: " + data.extract.substring(0, 80) + "...";
+                document.getElementById('outIntro').innerText = data.extract.split('.')[0] + "."; // First sentence
+                document.getElementById('outDetail').innerText = data.extract; // Full detail
+            } else { alert("Topic not found!"); }
         }
     </script>
 </body>
